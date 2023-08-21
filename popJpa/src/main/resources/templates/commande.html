@@ -19,6 +19,12 @@
     />
     <!-- MDB -->
     <link rel="stylesheet" href="css/mdb.min.css" />
+
+    <!-- style de la page commande -->
+    <link rel="stylesheet" th:href="@{/css/commande.css}" />
+
+    <!-- scripte de la page commande -->
+    <script th:src="@{/js/commandeScript.js}"></script>
 </head>
 <body>
 <div style="margin: 2em">
@@ -58,34 +64,28 @@
             </form>
         </div>
         <div class="">
-            <ol class="list-group list-group-light list-group-numbered">
-                <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Subheading</div>
-                        Content for list item
+            <div class="product-list">
+                <div th:each="product : ${productList}" class="product-card">
+                    <div class="product-image">
+                        <img th:src="@{/img/__${product.url_image}__.jpg}" alt="Product Image">
+                        <div class="click-count">
+                            <div class="click-counter">0</div>
+                            <div class="increment-button">+</div>
+                        </div>
+                        <div class="remove-button"></div>
                     </div>
-                    <span class="badge badge-primary rounded-pill">14</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Subheading</div>
-                        Content for list item
+                    <div class="product-details">
+                        <p class="product-name" th:text="${product.name}"></p>
+                        <p class="product-price" th:text="${product.prix} + €"></p>
                     </div>
-                    <span class="badge badge-primary rounded-pill">14</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Subheading</div>
-                        Content for list item
-                    </div>
-                    <span class="badge badge-primary rounded-pill">14</span>
-                </li>
-            </ol>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<ul>
-    <li th:each="product : ${productList}" th:text="${product.name} + ':' + ${product.prix}"></li>
-</ul>
+
+
+
+
 </body>
 </html>
