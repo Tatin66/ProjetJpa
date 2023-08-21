@@ -7,20 +7,25 @@ import jakarta.persistence.*
 data class ProduitEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val idProduit: Long? = null,
+    val id_produit: Long? = null,
     val name: String? = null,
-    val urlImage: String? = null,
+    val url_image: String? = null,
     val quantity: Int? = null,
     val prix: Float? = null,
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
     name = "commande_produit", //Nom de la table intermédiaire
     //Clé étrangère représentant cette classe
-    joinColumns = [JoinColumn(name = "fk_produit_commande")],
+    joinColumns = [JoinColumn(name = "id_produit")],
     //Clé étrangère représentant l'autre classe
-    inverseJoinColumns = [JoinColumn(name = "fk_commande_produit")]
+    inverseJoinColumns = [JoinColumn(name = "id_commande")]
     )
-
     var commande: List<CommandeEntity>? = ArrayList()
-)
+
+
+) {
+    override fun toString(): String {
+        return "ProduitEntity(id_produit=$id_produit, name=$name, url_image=$url_image, quantity=$quantity, prix=$prix)"
+    }
+}

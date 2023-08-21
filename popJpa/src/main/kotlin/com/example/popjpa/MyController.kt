@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController
 
 @Controller
 class MyController {
-
     @GetMapping("/test")
     fun test(): String{
         println("test")
