@@ -15,31 +15,31 @@
 .product-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-end; /* Aligner la liste à droite */
+    justify-content: flex-end;
     gap: 20px;
-    height: 66.66%; /* Limiter la liste à 2 tiers de la largeur */
-    margin-left: auto; /* Déplacer la liste vers la droite */
+    height: 66.66%;
+    margin-left: auto;
 }
 
 .product-list-container {
     overflow-y: auto;
-    max-height: calc(100vh - 20em); /* Hauteur maximale de la liste (100% de la vue - 30em) */
-    padding-top: 1em; /* Espacement en haut */
+    max-height: calc(100vh - 20em);
+    padding-top: 1em;
 }
 
 .custom-form-container {
-    flex: 1; /* Occupe le tiers restant */
-    margin-left: 2em; /* Espacement entre la liste et le formulaire */
-    max-width: calc(33.33% - 2em); /* Largeur maximale du formulaire */
-    max-height: calc(100vh - 30em); /* Hauteur maximale */
-    margin-top: auto; /* Coller en bas de la zone scrollable */
-    padding-bottom: 1em; /* Espacement en bas */
+    flex: 1;
+    margin-left: 2em;
+    max-width: calc(33.33% - 2em);
+    max-height: calc(100vh - 30em);
+    margin-top: auto;
+    padding-bottom: 1em;
 }
 
 .form-container {
-    flex: 1; /* Occupe le tiers restant */
-    margin-left: 2em; /* Espacement entre la liste et le formulaire */
-    max-width: calc(33.33% - 2em); /* Largeur maximale du formulaire */
+    flex: 1;
+    margin-left: 2em;
+    max-width: calc(33.33% - 2em);
 }
 
 
