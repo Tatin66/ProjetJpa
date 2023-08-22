@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class ProduitService(val produitRepository: ProduitRepository) {
-    fun getProduit(): MutableList<ProduitEntity> {
+    fun getAllProduits(): List<ProduitEntity> {
         return produitRepository.findAll()
     }
 }

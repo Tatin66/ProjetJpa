@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <title>Commandes POPJpa</title>
     <!-- MDB icon -->
-    <link rel="icon" href="img/favicon.png" type="image/x-icon" />
+    <link rel="icon" href="img/favicon.png" type="image/x-icon"/>
     <!-- Font Awesome -->
     <link
             rel="stylesheet"
@@ -18,21 +18,20 @@
             href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
     />
     <!-- MDB -->
-    <link rel="stylesheet" href="css/mdb.min.css" />
+    <link rel="stylesheet" href="css/mdb.min.css"/>
 
     <!-- style de la page commande -->
-    <link rel="stylesheet" th:href="@{/css/commande.css}" />
+    <link rel="stylesheet" th:href="@{/css/commande.css}"/>
 
     <!-- scripte de la page commande -->
     <script th:src="@{/js/commandeScript.js}"></script>
 </head>
 <body>
 <div style="margin: 2em">
-    <form th:action="@{/formSubmit}" method="post">
-    <div class="h-100 d-flex flex-row justify-content-between align-items-start">
-        <div class="product-list-container">
+    <form th:action="@{/formSubmit}" th:object="${orderForm}" method="post">
+        <div class="h-100 d-flex flex-row justify-content-between align-items-start">
             <div class="product-list">
-                <div th:each="product : ${productList}" class="product-card">
+                <div th:each="product, productIndex : *{products}" class="product-card">
                     <div class="product-image">
                         <img th:src="@{/img/__${product.url_image}__.jpg}" alt="Product Image">
                         <div class="click-count">
@@ -42,51 +41,46 @@
                         <div class="remove-button">
                         </div>
                     </div>
-                    <div class="product-details">
-                        <p class="product-name" th:text="${product.name}"></p>
-                        <p class="product-price" th:text="${product.prix} + €"></p>
-                    </div>
-                    <input type="hidden" th:name="${product.id_produit}" th:data-product-id="${product.id_produit}" value="0">
+                    <input type="hidden" th:field="*{products[__${productIndex.index}__].id_produit}" />
+                    <input type="number" th:field="*{products[__${productIndex.index}__].quantity}" class="product-quantity-input"/>
                 </div>
             </div>
+            <div class="form-container">
+
+                <!-- Name -->
+                <div class="form-outline mb-4">
+                    <input type="text" id="form6Example1" name="name" class="form-control"/>
+                    <label class="form-label" for="form6Example3">Name</label>
+                </div>
+
+                <!-- Phone number -->
+                <div class="form-outline mb-4">
+                    <input type="text" id="form6Example3" name="phoneNumber" class="form-control"/>
+                    <label class="form-label" for="form6Example3">Phone Number</label>
+                </div>
+
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                    <input type="email" id="form6Example5" name="email" class="form-control"/>
+                    <label class="form-label" for="form6Example5">Email</label>
+                </div>
+
+                <!-- Date Picker -->
+                <div class="form-outline datepicker" data-mdb-toggle-button="true">
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="exampleDatepicker1"
+                            data-mdb-toggle="datepicker"
+                    />
+                    <label for="exampleDatepicker1" class="form-label">Select a date</label>
+                </div>
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4">Place order</button>
+
+            </div>
         </div>
-    </div>
-    <div class="form-container">
-
-            <!-- Name -->
-            <div class="form-outline mb-4">
-                <input type="text" id="form6Example1" class="form-control" />
-                <label class="form-label" for="form6Example3">Name</label>
-            </div>
-
-            <!-- Phone number -->
-            <div class="form-outline mb-4">
-                <input type="text" id="form6Example3" class="form-control" />
-                <label class="form-label" for="form6Example3">Phone Number</label>
-            </div>
-
-            <!-- Email input -->
-            <div class="form-outline mb-4">
-                <input type="email" id="form6Example5" class="form-control" />
-                <label class="form-label" for="form6Example5">Email</label>
-            </div>
-
-            <!-- Date Picker -->
-            <div class="form-outline datepicker" data-mdb-toggle-button="true">
-                <input
-                        type="text"
-                        class="form-control"
-                        id="exampleDatepicker1"
-                        data-mdb-toggle="datepicker"
-                />
-                <label for="exampleDatepicker1" class="form-label">Select a date</label>
-            </div>
-            <!-- Submit button -->
-            <button type="submit" class="btn btn-primary btn-block mb-4">Place order</button>
-
-    </div>
     </form>
 </div>
 </body>
 </html>
-
