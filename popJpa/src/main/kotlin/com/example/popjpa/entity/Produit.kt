@@ -12,6 +12,7 @@ data class ProduitEntity(
     val url_image: String? = null,
     val quantity: Int? = null,
     val prix: Float? = null,
+    var active: Boolean? = true,
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -26,6 +27,6 @@ data class ProduitEntity(
 
 ) {
     override fun toString(): String {
-        return "ProduitEntity(id_produit=$id_produit, name=$name, url_image=$url_image, quantity=$quantity, prix=$prix)"
+        return "ProduitEntity(id_produit=$id_produit, name=$name, url_image=$url_image, quantity=$quantity, prix=$prix, active=$active)"
     }
 }
