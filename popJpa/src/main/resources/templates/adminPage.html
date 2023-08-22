@@ -83,35 +83,12 @@
 </nav>
 <!-- Navbar -->
 
-<!-- carousel -->
-<div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-mdb-ride="carousel">
-    <div class="carousel-indicators">
-        <button
-                type="button"
-                data-mdb-target="#carouselExampleCaptions"
-                data-mdb-slide-to="0"
-                class="active"
-                aria-current="true"
-                aria-label="Slide 1"
-        ></button>
-        <button
-                type="button"
-                data-mdb-target="#carouselExampleCaptions"
-                data-mdb-slide-to="1"
-                aria-label="Slide 2"
-        ></button>
-        <button
-                type="button"
-                data-mdb-target="#carouselExampleCaptions"
-                data-mdb-slide-to="2"
-                aria-label="Slide 3"
-        ></button>
-    </div>
-</div>
-
 <!-- Contenu de la page d'administration -->
-<div class="container mt-5">
+<div class="container">
+
     <h2>Administration</h2>
+
+    <!-- ... précédent contenu ... -->
 
     <!-- Affichage de la liste des produits -->
     <table class="table">
@@ -124,21 +101,21 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="product : ${products}">
-            <td th:text="${product.id}"></td>
-            <td th:text="${product.name}"></td>
-            <td th:text="${product.active} ? 'Oui' : 'Non'"></td>
+        <tr th:each="produit : ${produits}">
+            <td th:text="${produit.id_produit}"></td>
+            <td th:text="${produit.name}"></td>
+            <td th:text="${produit.active} ? 'Oui' : 'Non'"></td>
             <td>
-                <button class="btn btn-sm btn-success">Activer</button>
-                <button class="btn btn-sm btn-warning">Désactiver</button>
-                <button class="btn btn-sm btn-danger">Supprimer</button>
+                <a th:href="@{/adminPage/activate/{id}(id=${produit.id_produit})}" class="btn btn-sm btn-success">Activer</a>
+                <a th:href="@{/adminPage/deactivate/{id}(id=${produit.id_produit})}" class="btn btn-sm btn-warning">Désactiver</a>
+                <a th:href="@{/adminPage/delete/{id}(id=${produit.id_produit})}" class="btn btn-sm btn-danger">Supprimer</a>
             </td>
         </tr>
         </tbody>
     </table>
 
     <!-- Formulaire pour ajouter un nouveau produit -->
-    <form method="post" action="#">
+    <form method="post" th:action="@{/adminPage/addProduct}">
         <div class="mb-3">
             <label for="productName" class="form-label">Nom du produit</label>
             <input type="text" class="form-control" id="productName" name="productName">

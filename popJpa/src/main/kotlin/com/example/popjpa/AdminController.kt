@@ -1,15 +1,14 @@
 package com.example.popjpa
 
 import com.example.popjpa.entity.AdminDao
-import jakarta.servlet.http.HttpSession
+import com.example.popjpa.entity.ProduitEntity
+import com.example.popjpa.service.ProduitService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.ModelAttribute
-import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.*
 
 @Controller
-class AdminController {
+class AdminController (private val produitService: ProduitService) {
 
     @GetMapping("/adminConnexion")
     fun showFormAdminConnexion(model: Model): String {
@@ -32,8 +31,28 @@ class AdminController {
 
     // Cette route doit correspondre à la redirection réussie ci-dessus
     @GetMapping("/adminPage")
-    fun showAdminDashboard(): String {
-        // Chargez les données nécessaires pour le tableau de bord de l'administrateur
-        return "adminPage" // Remplacez par le nom de votre vue pour le tableau de bord
+    fun showAdminDashboard(model: Model): String {
+        val produits = produitService.getAllProduits() // Obtenez la liste de tous les produits depuis le service
+        model.addAttribute("produits", produits) // Ajoutez la liste au modèle
+        return "adminPage"
+    }
+
+    @GetMapping("/adminPage/activate/{id}")
+    fun activateProduit(@PathVariable id: Long): String {
+        produitService.activateProduit(id) // Appel au service pour activer le produit
+        return "redirect:/adminPage" // Redirection vers la page d'administration
+    }
+
+    @GetMapping("/adminPage/deactivate/{id}")
+    fun deactivateProduit(@PathVariable id: Long): String {
+        produitService.deactivateProduit(id) // Appel au service pour désactiver le produit
+        return "redirect:/adminPage" // Redirection vers la page d'administration
+    }
+
+    @PostMapping("/adminPage/addProduct")
+    fun addProduct(@RequestParam productName: String): String {
+        val newProduct = ProduitEntity(name = productName, active = true) // Créez un nouveau produit
+        produitService.saveProduit(newProduct) // Appel au service pour sauvegarder le nouveau produit
+        return "redirect:/adminPage" // Redirection vers la page d'administration
     }
 }
