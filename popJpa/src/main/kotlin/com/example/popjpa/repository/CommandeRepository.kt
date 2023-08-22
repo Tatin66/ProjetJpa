@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository                       //<Bean, Typage Id>
 interface CommandeRepository : JpaRepository<CommandeEntity, Long> {
-
+    fun findByDate(dateCommande: String): List<CommandeEntity>
 }
