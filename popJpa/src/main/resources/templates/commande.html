@@ -90,11 +90,11 @@
 <!-- Navbar -->
 <div style="margin: 2em">
     <form th:action="@{/formSubmit}" th:object="${orderForm}" method="post">
-        <div class="h-100 d-flex flex-row justify-content-between align-items-start">
+        <div class="h-100 d-flex flex-row justify-content-between align-items-start" >
             <div class="product-list-container">
                 <div class="product-list">
                     <div th:each="product, productIndex : *{products}" class="product-card">
-                        <div class="product-image">
+                        <div class="product-image" th:if="${product.active}">
                             <img th:src="@{/img/__${product.url_image}__.jpg}" alt="Product Image">
                             <div class="click-count">
                                 <div class="click-counter">0</div>
@@ -102,6 +102,9 @@
                             </div>
                             <div class="remove-button">
                             </div>
+                        </div>
+                        <div class="product-image" th:unless="${product.active}">
+                            <img th:src="@{/img/noProduct.png}" alt="Product Image">
                         </div>
                         <div class="product-details">
                             <p class="product-name" th:text="${product.name}"></p>

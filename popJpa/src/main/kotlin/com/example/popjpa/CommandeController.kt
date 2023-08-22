@@ -50,6 +50,7 @@ class CommandeController(val produitService: ProduitService, val commandeService
                 }
             }
             var newCommande = CommandeEntity(session_id = sessionId, telephone = phoneNumber, nom = name, date = date, produit = productsBuy)
+            println("nouvelle commande :$newCommande")
             commandeService.saveCommande(newCommande)
         }
 
