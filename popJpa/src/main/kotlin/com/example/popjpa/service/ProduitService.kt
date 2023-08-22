@@ -5,7 +5,7 @@ import com.example.popjpa.repository.ProduitRepository
 import org.springframework.stereotype.Service
 
 @Service
-class ProduitService(private val produitRepository: ProduitRepository) { // Injectez le repository de produit
+class ProduitService(private val produitRepository: ProduitRepository) {
 
     fun getAllProduits(): List<ProduitEntity> {
         return produitRepository.findAll()

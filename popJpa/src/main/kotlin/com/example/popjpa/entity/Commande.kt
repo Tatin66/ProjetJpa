@@ -1,7 +1,6 @@
 package com.example.popjpa.entity
 
 import jakarta.persistence.*
-import java.util.Date
 
 @Entity
 @Table(name = "commande")
@@ -15,6 +14,8 @@ data class CommandeEntity (
     var date: String? = null,
 
     @ManyToMany(fetch = FetchType.EAGER)
+    // FetchType.EAGER:
+    // Lorsqu'une entité est chargée, les associations marquées avec EAGER seront également chargées immédiatement.
     @JoinTable(
     name = "commande_produit", //Nom de la table intermédiaire
     //Clé étrangère représentant cette classe
