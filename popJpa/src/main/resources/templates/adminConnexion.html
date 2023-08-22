@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Admin JPA-JSP Pop</title>
+  <!-- MDB icon -->
+  <link rel="icon" href="img/favicon.png" type="image/x-icon" />
+  <!-- Font Awesome -->
+  <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  />
+  <!-- Google Fonts Roboto -->
+  <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+  />
+  <!-- MDB -->
+  <link rel="stylesheet" href="css/mdb.min.css" />
+</head>
+
+<body>
+<!-- Navbar -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white">
+  <!-- Container wrapper -->
+  <div class="container">
+    <!-- Toggle button -->
+    <button
+            class="navbar-toggler"
+            type="button"
+            data-mdb-toggle="collapse"
+            data-mdb-target="#navbarSupportedContent1"
+            aria-controls="navbarSupportedContent1"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+      <!-- Navbar brand -->
+      <img
+              src="/img/favicon.png"
+              height="20"
+              alt="un petit A ?"
+              loading="lazy"
+      />
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item active">
+          <a class="nav-link " href="<!--TODO: add link to Home Controller-->">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="commande">Commandes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="admin">Adminisatrateur</a>
+        </li>
+      </ul>
+      <!-- Left links -->
+    </div>
+    <!-- Collapsible wrapper -->
+
+    <!-- Right elements -->
+    <div class="d-flex align-items-center">
+      <!-- Icon -->
+      <a class="nav-link me-3" href="<!--TODO: Ajouter un lien vers le chariot actuel-->">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="badge rounded-pill badge-notification bg-danger"><!--TODO: Ajouter le nombre d'item dans le panier--></span>
+      </a>
+
+      <a href="https://github.com/Tatin66/ProjetJpa" class="border rounded px-2 nav-link"
+         target="_blank">
+        <i class="fab fa-github me-2"></i>Git Hub
+      </a>
+    </div>
+    <!-- Right elements -->
+
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+
+<!--Main layout-->
+<main class="mt-5">
+  <div class="container mt-5">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark mt-3 mb-5 shadow p-2" style="background-color: #ffffff">
+      <!-- Container wrapper -->
+      <div class="container-fluid">
+
+        <!-- Navbar brand -->
+        <span class="navbar-brand">Categories:</span>
+
+        <!-- Toggle button -->
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-mdb-toggle="collapse"
+                data-mdb-target="#navbarSupportedContent2"
+                aria-controls="navbarSupportedContent2"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent2">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <!--TODO: On fait une categorie ou pas ?-->
+            <!-- Link -->
+            <li class="nav-item acitve">
+              <a class="nav-link text-white" href="#">All</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">Fantastique</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">Sport wears</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">Outwears</a>
+            </li>
+
+          </ul>
+
+        </div>
+      </div>
+      <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+
+    <form method="post" th:action="'/loginSubmit'" th:object="${admin}">
+      <!-- Email input -->
+      <div class="form-outline mb-4">
+        <input type="text" id="form2Example1" class="form-control" th:field="*{login}"/>
+        <label class="form-label" for="form2Example1">Admin identifiant</label>
+      </div>
+
+      <!-- Password input -->
+      <div class="form-outline mb-4">
+        <input type="password" id="form2Example2" class="form-control" th:field="*{password}"/>
+        <label class="form-label" for="form2Example2">Password</label>
+      </div>
+
+      <!-- Afficher un message d'erreur si le paramètre d'erreur est présent dans l'URL -->
+      <p th:if="${param.error}" class="text-danger">Identifiants incorrects. Veuillez réessayer.</p>
+
+      <!-- Submit button -->
+      <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+
+    </form>
+  </div>
+</main>
+<!--Main layout-->
+
+<footer class="text-center text-white mt-4" style="background-color: #607D8B">
+
+  <!--Call to action-->
+  <div class="pt-4 pb-2">
+    <a class="btn btn-outline-white footer-cta mx-2" href="<!--TODO: Lien vers la page qui nous présente-->" target="_blank" role="button">A Propos du Groupe
+      <i class="fas fa-help ms-2"></i>
+    </a>
+  </div>
+  <!--/.Call to action-->
+
+  <hr class="text-dark">
+
+  <div class="container">
+    <!-- Section: Social media -->
+    <section class="mb-3">
+      <!-- Github -->
+      <a
+              class="btn-link btn-floating btn-lg text-white"
+              href="https://github.com/Tatin66/ProjetJpa"
+              role="button"
+              data-mdb-ripple-color="dark"
+      ><i class="fab fa-github"></i
+      ></a>
+    </section>
+    <!-- Section: Social media -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); text-color: #E0E0E0">
+    © 2023 Copyright:
+    <p class="text-white">Le grouppe de Manon RETOURNAT, Loréne DUFET, Valentin PREVOST DEBAISIEUX</p>
+  </div>
+  <!-- Copyright -->
+</footer>
+
+<!-- End your project here-->
+
+<!-- MDB -->
+<script type="text/javascript" src="js/mdb.min.js"></script>
+<!-- Custom scripts -->
+<script type="text/javascript"></script>
+</body>
+</html>

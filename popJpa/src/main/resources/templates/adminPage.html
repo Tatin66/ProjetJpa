@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>JPA-JSP Pop - Administration</title>
+    <!-- MDB icon -->
+    <link rel="icon" href="img/favicon.png" type="image/x-icon" />
+    <!-- Font Awesome -->
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Google Fonts Roboto -->
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+    <!-- MDB -->
+    <link rel="stylesheet" href="css/mdb.min.css" />
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white">
+    <!-- Container wrapper -->
+    <div class="container">
+        <!-- Toggle button -->
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-mdb-toggle="collapse"
+                data-mdb-target="#navbarSupportedContent1"
+                aria-controls="navbarSupportedContent1"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+            <!-- Navbar brand -->
+            <img
+                    src="/img/favicon.png"
+                    height="20"
+                    alt="un petit A ?"
+                    loading="lazy"
+            />
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link " href="<!--TODO: add link to Home Controller-->">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="commande">Commandes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="adminConnexion">Adminisatrateur</a>
+                </li>
+            </ul>
+            <!-- Left links -->
+        </div>
+        <!-- Collapsible wrapper -->
+
+        <!-- Right elements -->
+        <div class="d-flex align-items-center">
+            <!-- Icon -->
+            <a class="nav-link me-3" href="<!--TODO: Ajouter un lien vers le chariot actuel-->">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="badge rounded-pill badge-notification bg-danger"><!--TODO: Ajouter le nombre d'item dans le panier--></span>
+            </a>
+
+            <a href="https://github.com/Tatin66/ProjetJpa" class="border rounded px-2 nav-link"
+               target="_blank">
+                <i class="fab fa-github me-2"></i>Git Hub
+            </a>
+        </div>
+        <!-- Right elements -->
+
+    </div>
+    <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+
+<!-- carousel -->
+<div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-mdb-ride="carousel">
+    <div class="carousel-indicators">
+        <button
+                type="button"
+                data-mdb-target="#carouselExampleCaptions"
+                data-mdb-slide-to="0"
+                class="active"
+                aria-current="true"
+                aria-label="Slide 1"
+        ></button>
+        <button
+                type="button"
+                data-mdb-target="#carouselExampleCaptions"
+                data-mdb-slide-to="1"
+                aria-label="Slide 2"
+        ></button>
+        <button
+                type="button"
+                data-mdb-target="#carouselExampleCaptions"
+                data-mdb-slide-to="2"
+                aria-label="Slide 3"
+        ></button>
+    </div>
+</div>
+
+<!-- Contenu de la page d'administration -->
+<div class="container mt-5">
+    <h2>Administration</h2>
+
+    <!-- Affichage de la liste des produits -->
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Actif</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.active} ? 'Oui' : 'Non'"></td>
+            <td>
+                <button class="btn btn-sm btn-success">Activer</button>
+                <button class="btn btn-sm btn-warning">Désactiver</button>
+                <button class="btn btn-sm btn-danger">Supprimer</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Formulaire pour ajouter un nouveau produit -->
+    <form method="post" action="#">
+        <div class="mb-3">
+            <label for="productName" class="form-label">Nom du produit</label>
+            <input type="text" class="form-control" id="productName" name="productName">
+        </div>
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+    </form>
+</div>
+
+<!-- Footer -->
+<!-- ... votre code du footer ... -->
+</body>
+</html>
