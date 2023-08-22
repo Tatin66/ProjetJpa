@@ -26,15 +26,4 @@ class CommandeController(val produitService: ProduitService) {
         return "commande"
     }
 
-    @PostMapping("/submit")
-    fun submitOrder(@ModelAttribute orderForm: OrderForm): String? {
-        // Traitez les données du formulaire ici
-        val name: String = orderForm.getName()
-        val phoneNumber: String = orderForm.getPhoneNumber()
-        val email: String = orderForm.getEmail()
-
-        // Faites ce que vous devez faire avec les données
-        return "redirect:/success" // Redirigez vers une page de confirmation
-    }
-
 }
