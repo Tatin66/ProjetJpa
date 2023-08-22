@@ -8,11 +8,11 @@ data class ProduitEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    val id_produit: Long? = null,
-    val name: String? = null,
-    val url_image: String? = null,
-    val quantity: Int? = null,
-    val prix: Float? = null,
+    var id_produit: Long? = null,
+    var name: String? = null,
+    var url_image: String? = null,
+    var quantity: Int? = null,
+    var prix: Float? = null,
     var active: Boolean? = true,
 
     @ManyToMany(fetch = FetchType.LAZY)

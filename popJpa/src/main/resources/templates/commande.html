@@ -27,6 +27,67 @@
     <script th:src="@{/js/commandeScript.js}"></script>
 </head>
 <body>
+<!-- Navbar -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white">
+    <!-- Container wrapper -->
+    <div class="container">
+        <!-- Toggle button -->
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-mdb-toggle="collapse"
+                data-mdb-target="#navbarSupportedContent1"
+                aria-controls="navbarSupportedContent1"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+            <!-- Navbar brand -->
+            <img
+                    src="/img/favicon.png"
+                    height="20"
+                    alt="un petit A ?"
+                    loading="lazy"
+            />
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link " href="<!--TODO: add link to Home Controller-->">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="commande">Commandes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="adminConnexion.html">Adminisatrateur</a>
+                </li>
+            </ul>
+            <!-- Left links -->
+        </div>
+        <!-- Collapsible wrapper -->
+
+        <!-- Right elements -->
+        <div class="d-flex align-items-center">
+            <!-- Icon -->
+            <a class="nav-link me-3" href="<!--TODO: Ajouter un lien vers le chariot actuel-->">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="badge rounded-pill badge-notification bg-danger"><!--TODO: Ajouter le nombre d'item dans le panier--></span>
+            </a>
+
+            <a href="https://github.com/Tatin66/ProjetJpa" class="border rounded px-2 nav-link"
+               target="_blank">
+                <i class="fab fa-github me-2"></i>Git Hub
+            </a>
+        </div>
+        <!-- Right elements -->
+
+    </div>
+    <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
 <div style="margin: 2em">
     <form th:action="@{/formSubmit}" th:object="${orderForm}" method="post">
         <div class="h-100 d-flex flex-row justify-content-between align-items-start">
@@ -57,19 +118,19 @@
 
                 <!-- Name -->
                 <div class="form-outline mb-4">
-                    <input type="text" id="form6Example1" name="name" class="form-control"/>
+                    <input type="text" id="form6Example1" name="name" class="form-control" value="ede"/>
                     <label class="form-label" for="form6Example3">Name</label>
                 </div>
 
                 <!-- Phone number -->
                 <div class="form-outline mb-4">
-                    <input type="text" id="form6Example3" name="phoneNumber" class="form-control"/>
+                    <input type="text" id="form6Example3" name="phoneNumber" class="form-control" value="daz"/>
                     <label class="form-label" for="form6Example3">Phone Number</label>
                 </div>
 
                 <!-- Email input -->
                 <div class="form-outline mb-4">
-                    <input type="email" id="form6Example5" name="email" class="form-control"/>
+                    <input type="email" id="form6Example5" name="email" class="form-control" value="fez@fez"/>
                     <label class="form-label" for="form6Example5">Email</label>
                 </div>
 
@@ -80,6 +141,8 @@
                             class="form-control"
                             id="exampleDatepicker1"
                             data-mdb-toggle="datepicker"
+                            value = "10/08/1998"
+                            name = "date"
                     />
                     <label for="exampleDatepicker1" class="form-label">Select a date</label>
                 </div>

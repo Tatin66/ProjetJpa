@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
         let count = parseInt(hiddenInput.value); // Initialiser le compteur à partir de la valeur cachée
 
         clickCounter.textContent = count;
+        hiddenQuantity.value = 0;
 
         updateRemoveButtonVisibility();
 
