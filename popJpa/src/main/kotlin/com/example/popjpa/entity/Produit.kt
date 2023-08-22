@@ -7,6 +7,7 @@ import jakarta.persistence.*
 data class ProduitEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     val id_produit: Long? = null,
     val name: String? = null,
     val url_image: String? = null,

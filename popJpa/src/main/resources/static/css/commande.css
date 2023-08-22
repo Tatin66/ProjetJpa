@@ -1,4 +1,7 @@
-
+.scrollable{
+    overflow: scroll;
+    height: 40em;
+}
 .custom-layout {
     display: flex;
     flex-direction: row;
