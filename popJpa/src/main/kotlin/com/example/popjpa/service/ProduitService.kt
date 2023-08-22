@@ -30,4 +30,8 @@ class ProduitService(private val produitRepository: ProduitRepository) { // Inje
             produitRepository.save(it)
         }
     }
+
+    fun deleteProduit(id: Long) {
+        produitRepository.deleteById(id)
+    }
 }

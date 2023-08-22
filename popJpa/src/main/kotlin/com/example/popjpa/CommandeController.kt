@@ -19,7 +19,7 @@ class CommandeController(val produitService: ProduitService) {
 
     @GetMapping("/commande")
     fun commandes(model: Model): String{
-        val produitListe = produitService.getProduit()
+        val produitListe = produitService.getAllProduits()
 
         println(produitListe)
         model.addAttribute("productList", produitListe)

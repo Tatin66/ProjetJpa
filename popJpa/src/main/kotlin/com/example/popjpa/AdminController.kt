@@ -33,7 +33,8 @@ class AdminController (private val produitService: ProduitService) {
     @GetMapping("/adminPage")
     fun showAdminDashboard(model: Model): String {
         val produits = produitService.getAllProduits() // Obtenez la liste de tous les produits depuis le service
-        model.addAttribute("produits", produits) // Ajoutez la liste au modèle
+        println(produits)
+        model.addAttribute("products", produits) // Ajoutez la liste au modèle
         return "adminPage"
     }
 
@@ -50,9 +51,27 @@ class AdminController (private val produitService: ProduitService) {
     }
 
     @PostMapping("/adminPage/addProduct")
-    fun addProduct(@RequestParam productName: String): String {
-        val newProduct = ProduitEntity(name = productName, active = true) // Créez un nouveau produit
+    fun addProduct(
+        @RequestParam productName: String,
+        @RequestParam productImage: String,
+        @RequestParam productQuantity: Int,
+        @RequestParam productPrice: Float,
+        @RequestParam productActive: Boolean
+    ): String {
+        val newProduct = ProduitEntity(
+            name = productName,
+            url_image = productImage,
+            quantity = productQuantity,
+            prix = productPrice,
+            active = productActive
+        )
         produitService.saveProduit(newProduct) // Appel au service pour sauvegarder le nouveau produit
+        return "redirect:/adminPage" // Redirection vers la page d'administration
+    }
+
+    @GetMapping("/adminPage/delete/{id}")
+    fun deleteProduit(@PathVariable id: Long): String {
+        produitService.deleteProduit(id) // Appel au service pour supprimer le produit
         return "redirect:/adminPage" // Redirection vers la page d'administration
     }
 }

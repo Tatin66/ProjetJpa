@@ -50,7 +50,7 @@
             <!-- Left links -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link " href="<!--TODO: add link to Home Controller-->">Home</a>
+                    <a class="nav-link " href="#">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="commande">Commandes</a>
@@ -83,48 +83,116 @@
 </nav>
 <!-- Navbar -->
 
-<!-- Contenu de la page d'administration -->
-<div class="container">
+    <!-- Contenu de la page d'administration -->
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h2>Administration</h2>
+    </div>
 
-    <h2>Administration</h2>
+        <!-- Affichage de la liste des produits -->
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Image</th>
+                <th>Quantité</th>
+                <th>Prix</th>
+                <th>Actif</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.id_produit}"></td>
+                <td th:text="${product.name}"></td>
+                <td><img th:src="@{/img/__${product.url_image}__.jpg}" alt="Image du produit" height="50" /></td>
+                <td th:text="${product.quantity}"></td>
+                <td th:text="${product.prix}"></td>
+                <td>
+                    <span th:if="${product.active}">Actif</span>
+                    <span th:unless="${product.active}">Inactif</span>
+                </td>
+                <td>
+                    <a th:href="@{/adminPage/activate/{id}(id=${product.id_produit})}" class="btn btn-sm btn-success">Activer</a>
+                    <a th:href="@{/adminPage/deactivate/{id}(id=${product.id_produit})}" class="btn btn-sm btn-warning">Désactiver</a>
+                    <a th:href="@{/adminPage/delete/{id}(id=${product.id_produit})}" class="btn btn-sm btn-danger">Supprimer</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
 
-    <!-- ... précédent contenu ... -->
-
-    <!-- Affichage de la liste des produits -->
-    <table class="table">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nom</th>
-            <th>Actif</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="produit : ${produits}">
-            <td th:text="${produit.id_produit}"></td>
-            <td th:text="${produit.name}"></td>
-            <td th:text="${produit.active} ? 'Oui' : 'Non'"></td>
-            <td>
-                <a th:href="@{/adminPage/activate/{id}(id=${produit.id_produit})}" class="btn btn-sm btn-success">Activer</a>
-                <a th:href="@{/adminPage/deactivate/{id}(id=${produit.id_produit})}" class="btn btn-sm btn-warning">Désactiver</a>
-                <a th:href="@{/adminPage/delete/{id}(id=${produit.id_produit})}" class="btn btn-sm btn-danger">Supprimer</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
-    <!-- Formulaire pour ajouter un nouveau produit -->
-    <form method="post" th:action="@{/adminPage/addProduct}">
-        <div class="mb-3">
-            <label for="productName" class="form-label">Nom du produit</label>
-            <input type="text" class="form-control" id="productName" name="productName">
-        </div>
-        <button type="submit" class="btn btn-primary">Ajouter</button>
-    </form>
+        <!-- Formulaire pour ajouter un nouveau produit -->
+        <form method="post" action="/adminPage/addProduct">
+            <div class="mb-3">
+                <label for="productName" class="form-label">Nom du produit</label>
+                <input type="text" class="form-control" id="productName" name="productName">
+            </div>
+            <div class="mb-3">
+                <label for="productImage" class="form-label">URL de l'image</label>
+                <input type="text" class="form-control" id="productImage" name="productImage">
+            </div>
+            <div class="mb-3">
+                <label for="productQuantity" class="form-label">Quantité</label>
+                <input type="number" class="form-control" id="productQuantity" name="productQuantity">
+            </div>
+            <div class="mb-3">
+                <label for="productPrice" class="form-label">Prix</label>
+                <input type="number" step="0.01" class="form-control" id="productPrice" name="productPrice">
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="productActive" name="productActive" checked>
+                <label class="form-check-label" for="productActive">Actif</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        </form>
+    </div>
 </div>
 
 <!-- Footer -->
-<!-- ... votre code du footer ... -->
+<footer class="text-center text-white mt-4" style="background-color: #607D8B">
+
+    <!--Call to action-->
+    <div class="pt-4 pb-2">
+        <a class="btn btn-outline-white footer-cta mx-2" href="<!--TODO: Lien vers la page qui nous présente-->" target="_blank" role="button">A Propos du Groupe
+            <i class="fas fa-help ms-2"></i>
+        </a>
+    </div>
+    <!--/.Call to action-->
+
+    <hr class="text-dark">
+
+    <div class="container">
+        <!-- Section: Social media -->
+        <section class="mb-3">
+            <!-- Github -->
+            <a
+                    class="btn-link btn-floating btn-lg text-white"
+                    href="https://github.com/Tatin66/ProjetJpa"
+                    role="button"
+                    data-mdb-ripple-color="dark"
+            ><i class="fab fa-github"></i
+            ></a>
+        </section>
+        <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); text-color: #E0E0E0">
+        © 2023 Copyright:
+        <p class="text-white">Le grouppe de Manon RETOURNAT, Loréne DUFET, Valentin PREVOST DEBAISIEUX</p>
+    </div>
+    <!-- Copyright -->
+</footer>
+
+<!-- End your project here-->
+
+<!-- MDB -->
+<script type="text/javascript" src="js/mdb.min.js"></script>
+<!-- Custom scripts -->
+<script type="text/javascript"></script>
+</body>
+</html>
 </body>
 </html>
