@@ -7,11 +7,13 @@ import jakarta.persistence.*
 data class ProduitEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id_produit: Long? = null,
-    var name: String? = null,
-    var url_image: String? = null,
-    var quantity: Int? = null,
-    var prix: Float? = null,
+
+    val id_produit: Long? = null,
+    val name: String? = null,
+    val url_image: String? = null,
+    val quantity: Int? = null,
+    val prix: Float? = null,
+    var active: Boolean? = true,
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -26,6 +28,6 @@ data class ProduitEntity(
 
 ) {
     override fun toString(): String {
-        return "ProduitEntity(id_produit=$id_produit, name=$name, url_image=$url_image, quantity=$quantity, prix=$prix)"
+        return "ProduitEntity(id_produit=$id_produit, name=$name, url_image=$url_image, quantity=$quantity, prix=$prix, active=$active)"
     }
 }
