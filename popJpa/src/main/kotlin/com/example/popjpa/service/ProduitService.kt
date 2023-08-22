@@ -5,7 +5,6 @@ import com.example.popjpa.repository.ProduitRepository
 import org.springframework.stereotype.Service
 
 @Service
-
 class ProduitService(private val produitRepository: ProduitRepository) { // Injectez le repository de produit
 
     fun getAllProduits(): List<ProduitEntity> {
@@ -30,5 +29,9 @@ class ProduitService(private val produitRepository: ProduitRepository) { // Inje
             it.active = false
             produitRepository.save(it)
         }
+    }
+
+    fun deleteProduit(id: Long) {
+        produitRepository.deleteById(id)
     }
 }

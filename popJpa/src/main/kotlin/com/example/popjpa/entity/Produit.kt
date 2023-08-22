@@ -16,6 +16,8 @@ data class ProduitEntity(
     var active: Boolean? = true,
 
     @ManyToMany(fetch = FetchType.LAZY)
+    // FetchType.EAGER: les données ne sont pas chargées directement.
+    // Elles sont chargée lorsque la demande est faite explicitement dans le code.
     @JoinTable(
     name = "commande_produit", //Nom de la table intermédiaire
     //Clé étrangère représentant cette classe
@@ -27,6 +29,9 @@ data class ProduitEntity(
 
 
 ) {
+    // Override toString
+    // Permet de print les propriétés de l'objet
+    // sans déclencher le chargement des données associées (commande)
     override fun toString(): String {
         return "ProduitEntity(id_produit=$id_produit, name=$name, url_image=$url_image, quantity=$quantity, prix=$prix, active=$active)"
     }

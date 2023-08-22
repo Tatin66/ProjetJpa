@@ -12,47 +12,78 @@ class AdminController (private val produitService: ProduitService) {
 
     @GetMapping("/adminConnexion")
     fun showFormAdminConnexion(model: Model): String {
-        model.addAttribute("admin", AdminDao()) // Ajoutez une instance d'AdminDao au modèle
+        model.addAttribute("admin", AdminDao())
         return "adminConnexion"
     }
 
     @PostMapping("/loginSubmit")
     fun loginSubmitAndRedirection(@ModelAttribute admin: AdminDao): String {
-        val adminCredentials = AdminDao(login = "root", password = "root") // Créez une instance de référence avec les valeurs correctes
+        // Instance Admin avec les bonnes valeurs
+        val adminCredentials = AdminDao(login = "root", password = "root")
 
         if (admin.login == adminCredentials.login && admin.password == adminCredentials.password) {
             // Les identifiants sont valides, redirigez vers une nouvelle page
             return "redirect:/adminPage"
         } else {
-            // Redirigez vers la page de connexion avec le paramètre d'erreur
+            // Redirigez vers la page de connexion
             return "redirect:/adminConnexion"
         }
     }
 
-    // Cette route doit correspondre à la redirection réussie ci-dessus
+    // Connexion réussie : redirection vers la page administration
     @GetMapping("/adminPage")
     fun showAdminDashboard(model: Model): String {
-        val produits = produitService.getAllProduits() // Obtenez la liste de tous les produits depuis le service
-        model.addAttribute("produits", produits) // Ajoutez la liste au modèle
+        // Obtenir la liste de tous les produits
+        val produits = produitService.getAllProduits()
+        // println(produits)
+        // Ajoutez la liste au modèle / afficher sur la page
+        model.addAttribute("products", produits)
         return "adminPage"
     }
 
     @GetMapping("/adminPage/activate/{id}")
     fun activateProduit(@PathVariable id: Long): String {
-        produitService.activateProduit(id) // Appel au service pour activer le produit
-        return "redirect:/adminPage" // Redirection vers la page d'administration
+        // Appel au service pour activer le produit / en fonction id
+        produitService.activateProduit(id)
+        // Redirection vers la page d'administration / mise à jour affichage
+        return "redirect:/adminPage"
     }
 
     @GetMapping("/adminPage/deactivate/{id}")
     fun deactivateProduit(@PathVariable id: Long): String {
-        produitService.deactivateProduit(id) // Appel au service pour désactiver le produit
-        return "redirect:/adminPage" // Redirection vers la page d'administration
+        // Appel au service pour désactiver le produit
+        produitService.deactivateProduit(id)
+        // Redirection vers la page d'administration
+        return "redirect:/adminPage"
     }
 
     @PostMapping("/adminPage/addProduct")
-    fun addProduct(@RequestParam productName: String): String {
-        val newProduct = ProduitEntity(name = productName, active = true) // Créez un nouveau produit
-        produitService.saveProduit(newProduct) // Appel au service pour sauvegarder le nouveau produit
-        return "redirect:/adminPage" // Redirection vers la page d'administration
+    fun addProduct(
+        @RequestParam productName: String,
+        @RequestParam productImage: String,
+        @RequestParam productQuantity: Int,
+        @RequestParam productPrice: Float,
+        @RequestParam productActive: Boolean
+    ): String {
+        // Creér un nouvel objet produit / passer les variable (requestParam)
+        val newProduct = ProduitEntity(
+            name = productName,
+            url_image = productImage,
+            quantity = productQuantity,
+            prix = productPrice,
+            active = productActive
+        )
+        // Appel au service pour sauvegarder le nouveau produit
+        produitService.saveProduit(newProduct)
+        // Redirection vers la page d'administration / Mise à jour affichage
+        return "redirect:/adminPage"
+    }
+
+    @GetMapping("/adminPage/delete/{id}")
+    fun deleteProduit(@PathVariable id: Long): String {
+        // Appel au service pour supprimer le produit
+        produitService.deleteProduit(id)
+        // Redirection vers la page d'administration / Mise à jour affichage
+        return "redirect:/adminPage"
     }
 }

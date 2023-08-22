@@ -22,7 +22,6 @@ class CommandeController(val produitService: ProduitService) {
     @GetMapping("/commande")
     fun commandes(model: Model, orderForm: OrderForm): String {
         orderForm.products = produitService.getAllProduits()
-
         return "commande"
     }
 
